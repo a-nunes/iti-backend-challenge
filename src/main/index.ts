@@ -1,15 +1,10 @@
 import './config/module-alias'
 import 'dotenv/config'
-import express from 'express'
-import cors from 'cors'
-import validator from 'validator'
-
 import { env } from '@/main/config/env'
-import 'reflect-metadata'
+import { app } from '@/main/config/app'
 
-const app = express()
-app.use(express.json())
-app.use(cors())
+import validator from 'validator'
+import 'reflect-metadata'
 
 const options = {
   minLength: 9,
