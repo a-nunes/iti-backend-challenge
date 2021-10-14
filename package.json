@@ -4,7 +4,12 @@
   "description": "A solution for https://github.com/itidigital/backend-challenge",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node dist/main",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm test",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -21,5 +26,20 @@
   "bugs": {
     "url": "https://github.com/a-nunes/iti-backend-challenge/issues"
   },
-  "homepage": "https://github.com/a-nunes/iti-backend-challenge#readme"
+  "homepage": "https://github.com/a-nunes/iti-backend-challenge#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "git-commit-msg-linter": "^3.2.8",
+    "husky": "^7.0.2",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
 }
