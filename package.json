@@ -1,0 +1,25 @@
+{
+  "name": "iti-backend-challenge",
+  "version": "1.0.0",
+  "description": "A solution for https://github.com/itidigital/backend-challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-nunes/iti-backend-challenge.git"
+  },
+  "keywords": [
+    "iti",
+    "challenge",
+    "nodejs",
+    "backend"
+  ],
+  "author": "Artur L. Nunes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a-nunes/iti-backend-challenge/issues"
+  },
+  "homepage": "https://github.com/a-nunes/iti-backend-challenge#readme"
+}
