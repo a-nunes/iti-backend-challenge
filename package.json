@@ -4,12 +4,17 @@
   "description": "A solution for https://github.com/itidigital/backend-challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/main",
+    "start": "node -r dotenv/config dist/main",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "test": "npm test",
-    "prepare": "husky install"
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:coverage": "npm test -- --coverage",
+    "test:fb-api": "npm test -- -c './jest.integration.config.js' './tests/external/facebook-api.test.ts'",
+    "prepare": "husky install",
+    "dev": "ts-node-dev --respawn --transpile-only --inspect=0.0.0.0:9229 --ignore-watch node_modules -r dotenv/config src/main"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,12 @@
   },
   "homepage": "https://github.com/a-nunes/iti-backend-challenge#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/eslint": "^7.28.1",
+    "@types/jest": "^27.0.2",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^16.11.0",
+    "@types/rimraf": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^7.32.0",
@@ -37,9 +48,17 @@
     "eslint-plugin-promise": "^5.1.0",
     "git-commit-msg-linter": "^3.2.8",
     "husky": "^7.0.2",
+    "jest": "^27.2.5",
+    "lint-staged": "^11.2.3",
+    "ts-jest": "^27.0.6",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "module-alias": "^2.2.2",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2"
   }
 }
