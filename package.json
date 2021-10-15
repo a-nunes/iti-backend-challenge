@@ -12,7 +12,6 @@
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:coverage": "npm test -- --coverage",
-    "test:fb-api": "npm test -- -c './jest.integration.config.js' './tests/external/facebook-api.test.ts'",
     "prepare": "husky install",
     "dev": "ts-node-dev --respawn --transpile-only --inspect=0.0.0.0:9229 --ignore-watch node_modules -r dotenv/config src/main"
   },
