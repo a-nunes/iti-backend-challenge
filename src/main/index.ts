@@ -20,14 +20,13 @@ const options = {
   pointsForContainingNumber: 0,
   pointsForContainingSymbol: 0
 }
-const blacklistRegex = /[_|~=`{}[\]:";'<>?,./ ]/g
 
 app.post('/', (req, res) => {
   const { password } = req.body
+  const blacklistRegex = /[_|~=`{}[\]:";'<>?,./ ]/g
   const hasBlacklistSymbol = password.match(blacklistRegex)
   if (hasBlacklistSymbol) {
-    res.send(false)
-    return
+    return false
   }
   const points = validator.isStrongPassword(password, options) as unknown
   if (password.length < 9 || points as number > 0) {
