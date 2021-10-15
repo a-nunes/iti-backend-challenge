@@ -5,9 +5,15 @@ type HttpResponse = {
 
 export class ValidationController {
   async handle (httpRequest: any): Promise<HttpResponse> {
+    if (httpRequest.password === undefined || httpRequest.password === null) {
+      return {
+        statusCode: 400,
+        data: new Error('Bad Request')
+      }
+    }
     return {
-      statusCode: 400,
-      data: new Error('Bad Request')
+      statusCode: 200,
+      data: true
     }
   }
 }
@@ -31,11 +37,12 @@ describe('ValidationController', () => {
     expect(httpResponse.data).toEqual(new Error('Bad Request'))
   })
 
-  it('should return 200 if httpRequest is null', async () => {
+  it('should return 200 if called with correct input', async () => {
     const sut = new ValidationController()
 
-    const httpResponse = await sut.handle({ password: null })
+    const httpResponse = await sut.handle({ password: 'validPassword' })
 
-    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.data).toBe(true)
   })
 })
