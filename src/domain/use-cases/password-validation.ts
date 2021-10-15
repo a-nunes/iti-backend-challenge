@@ -10,5 +10,5 @@ export const setupPasswordValidation: Setup = validator => ({ password }) => {
   if (hasBlacklistSymbol || password.length < 9) {
     return false
   }
-  return validator.validate({ password })
+  return validator.isValid({ password })
 }

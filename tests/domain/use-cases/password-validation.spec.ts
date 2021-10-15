@@ -20,8 +20,8 @@ describe('PasswordValidation', () => {
   it('should call PasswordValidator with correct params', () => {
     sut({ password })
 
-    expect(passwordValidator.validate).toHaveBeenCalledWith({ password })
-    expect(passwordValidator.validate).toHaveBeenCalledTimes(1)
+    expect(passwordValidator.isValid).toHaveBeenCalledWith({ password })
+    expect(passwordValidator.isValid).toHaveBeenCalledTimes(1)
   })
 
   it('should return false if containing blacklist symbols', () => {

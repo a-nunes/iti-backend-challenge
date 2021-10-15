@@ -1,5 +1,5 @@
 export interface PasswordValidator {
-  validate(input: PasswordValidator.Input): PasswordValidator.Output
+  isValid(input: PasswordValidator.Input): PasswordValidator.Output
 }
 
 export namespace PasswordValidator {
