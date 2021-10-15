@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/a-nunes/iti-backend-challenge#readme",
   "devDependencies": {
+    "@jest-mock/express": "^1.4.5",
     "@stryker-mutator/core": "^5.4.1",
     "@stryker-mutator/jest-runner": "^5.4.1",
     "@types/cors": "^2.8.12",
