@@ -5,9 +5,6 @@ import { app } from '@/main/config/app'
 
 import 'reflect-metadata'
 
-app.post('/', (req, res) => {
-  res.send(true)
-})
 app.listen(env.port, () => {
   console.log(`Server running at http://localhost:${env.port}/`)
 })
