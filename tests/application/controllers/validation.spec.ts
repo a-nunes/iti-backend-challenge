@@ -1,4 +1,5 @@
 import { ValidationController } from '@/application/controllers'
+import { RequiredFieldError } from '@/application/errors'
 
 describe('ValidationController', () => {
   let validation: jest.Mock
@@ -17,14 +18,14 @@ describe('ValidationController', () => {
     const httpResponse = await sut.handle({ password: undefined })
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.data).toEqual(new Error('Bad Request'))
+    expect(httpResponse.data).toEqual(new RequiredFieldError('password'))
   })
 
   it('should return 400 if httpRequest is null', async () => {
     const httpResponse = await sut.handle({ password: null })
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.data).toEqual(new Error('Bad Request'))
+    expect(httpResponse.data).toEqual(new RequiredFieldError('password'))
   })
 
   it('should return 200 if called with correct input', async () => {
