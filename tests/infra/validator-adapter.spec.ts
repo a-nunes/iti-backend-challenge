@@ -6,7 +6,8 @@ jest.mock('validator')
 
 export class ValidatorAdapter implements PasswordValidator {
   isValid ({ password }: PasswordValidator.Input): PasswordValidator.Output {
-    return validator.isStrongPassword(password, { minLength: 9 })
+    const options = { minLength: 9, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }
+    return validator.isStrongPassword(password, options)
   }
 }
 
@@ -14,8 +15,10 @@ describe('ValidatorAdapter', () => {
   let password: string
   let fakeValidator: jest.Mocked<typeof validator>
   let sut: ValidatorAdapter
+  let options: object
 
   beforeAll(() => {
+    options = { minLength: 9, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 }
     password = 'valid_password'
     fakeValidator = validator as jest.Mocked<typeof validator>
     fakeValidator.isStrongPassword.mockImplementation(() => true)
@@ -28,7 +31,7 @@ describe('ValidatorAdapter', () => {
   it('should call isStrongPassword with correct params', () => {
     sut.isValid({ password })
 
-    expect(fakeValidator.isStrongPassword).toHaveBeenCalledWith(password, { minLength: 9 })
+    expect(fakeValidator.isStrongPassword).toHaveBeenCalledWith(password, options)
     expect(fakeValidator.isStrongPassword).toHaveBeenCalledTimes(1)
   })
 
