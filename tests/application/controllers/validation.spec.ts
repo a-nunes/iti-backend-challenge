@@ -15,14 +15,14 @@ describe('ValidationController', () => {
   })
 
   it('should return 400 if httpRequest is undefined', async () => {
-    const httpResponse = await sut.handle({ password: undefined })
+    const httpResponse = await sut.handle({ password: undefined as any })
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.data).toEqual(new RequiredFieldError('password'))
   })
 
   it('should return 400 if httpRequest is null', async () => {
-    const httpResponse = await sut.handle({ password: null })
+    const httpResponse = await sut.handle({ password: null as any })
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.data).toEqual(new RequiredFieldError('password'))
