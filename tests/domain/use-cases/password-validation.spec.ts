@@ -10,11 +10,16 @@ namespace PasswordValidator {
 }
 
 type Input = { password: string }
-type PasswordValidation = (input: Input) => void
+type PasswordValidation = (input: Input) => boolean
 type Setup = (validator: PasswordValidator) => PasswordValidation
 
 export const setupPasswordValidation: Setup = validator => ({ password }) => {
-  validator.validate({ password })
+  const blacklistRegex = /[_|~=`{}[\]:";'<>?,./ ]/g
+  const hasBlacklistSymbol = password.match(blacklistRegex)
+  if (hasBlacklistSymbol || password.length < 9) {
+    return false
+  }
+  return validator.validate({ password })
 }
 
 describe('PasswordValidation', () => {
@@ -24,7 +29,7 @@ describe('PasswordValidation', () => {
 
   beforeAll(() => {
     passwordValidator = mock()
-    password = 'any_password'
+    password = 'validPassword'
   })
 
   beforeEach(() => {
@@ -36,5 +41,17 @@ describe('PasswordValidation', () => {
 
     expect(passwordValidator.validate).toHaveBeenCalledWith({ password })
     expect(passwordValidator.validate).toHaveBeenCalledTimes(1)
+  })
+
+  it('should return false if containing blacklist symbols', () => {
+    const output = sut({ password: 'blacklist_{symbol' })
+
+    expect(output).toBe(false)
+  })
+
+  it('should return false if length lesser than 9', () => {
+    const output = sut({ password: 'less9' })
+
+    expect(output).toBe(false)
   })
 })
