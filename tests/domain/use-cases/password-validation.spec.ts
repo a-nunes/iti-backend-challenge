@@ -1,26 +1,7 @@
+import { PasswordValidator } from '@/domain/contracts'
+import { PasswordValidation, setupPasswordValidation } from '@/domain/use-cases'
+
 import { mock, MockProxy } from 'jest-mock-extended'
-
-interface PasswordValidator {
-  validate(input: PasswordValidator.Input): PasswordValidator.Output
-}
-
-namespace PasswordValidator {
-  export type Input = { password: string }
-  export type Output = boolean
-}
-
-type Input = { password: string }
-type PasswordValidation = (input: Input) => boolean
-type Setup = (validator: PasswordValidator) => PasswordValidation
-
-export const setupPasswordValidation: Setup = validator => ({ password }) => {
-  const blacklistRegex = /[_|~=`{}[\]:";'<>?,./ ]/g
-  const hasBlacklistSymbol = password.match(blacklistRegex)
-  if (hasBlacklistSymbol || password.length < 9) {
-    return false
-  }
-  return validator.validate({ password })
-}
 
 describe('PasswordValidation', () => {
   let passwordValidator: MockProxy<PasswordValidator>
