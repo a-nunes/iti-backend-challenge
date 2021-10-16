@@ -9,6 +9,8 @@ export const adaptExpressRouter = (controller: Controller): RequestHandler => {
     const { statusCode, data } = await controller.handle({ ...req.body })
     if (statusCode === 200) {
       res.status(200).send(data)
+    } else {
+      res.status(statusCode).send(data.message)
     }
   }
 }
@@ -48,6 +50,17 @@ describe('ExpressRouterAdapter', () => {
     expect(res.status).toHaveBeenCalledWith(200)
     expect(res.status).toHaveBeenCalledTimes(1)
     expect(res.send).toHaveBeenCalledWith('any_res_data')
+    expect(res.send).toHaveBeenCalledTimes(1)
+  })
+
+  it('should respond error statusCode and error message on fail', async () => {
+    controller.handle.mockResolvedValueOnce({ statusCode: 400, data: new Error('any_error') })
+
+    await sut(req, res, next)
+
+    expect(res.status).toHaveBeenCalledWith(400)
+    expect(res.status).toHaveBeenCalledTimes(1)
+    expect(res.send).toHaveBeenCalledWith('any_error')
     expect(res.send).toHaveBeenCalledTimes(1)
   })
 })
