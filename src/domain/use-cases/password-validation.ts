@@ -9,10 +9,13 @@ export const setupPasswordValidation: Setup = validator => ({ password }) => {
     return false
   }
   const blacklistRegex = /[_|~=`{}[\]:";'<>?,./ ]/g
-  const uniqueRegex = /^(?:([A-Za-z0-9!@#$%^&*()-+])(?!.*\1))*$/g
   const hasBlacklistSymbol = password.match(blacklistRegex)
+  if (hasBlacklistSymbol) {
+    return false
+  }
+  const uniqueRegex = /^(?:([A-Za-z0-9!@#$%^&*()-+])(?!.*\1))*$/g
   const hasOnlyUniqueChars = password.match(uniqueRegex)
-  if (hasBlacklistSymbol || !hasOnlyUniqueChars) {
+  if (!hasOnlyUniqueChars) {
     return false
   }
   return validator.isValid({ password })

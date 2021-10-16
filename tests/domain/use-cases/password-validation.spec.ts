@@ -48,4 +48,10 @@ describe('PasswordValidation', () => {
 
     expect(output).toBe(false)
   })
+
+  it('should return true on success', () => {
+    const output = sut({ password })
+
+    expect(output).toBe(true)
+  })
 })
