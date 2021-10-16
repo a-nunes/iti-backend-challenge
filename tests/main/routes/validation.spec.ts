@@ -1,4 +1,6 @@
 import { app } from '@/main/config/app'
+import { RequiredFieldError } from '@/application/errors'
+
 import request from 'supertest'
 
 describe('POST /api/validation', () => {
@@ -18,5 +20,14 @@ describe('POST /api/validation', () => {
 
     expect(status).toBe(200)
     expect(body).toBe(false)
+  })
+
+  it('should return 400 if data is undefined', async () => {
+    const { status, body } = await request(app)
+      .post('/api/validation')
+      .send({ })
+
+    expect(status).toBe(400)
+    expect(body).toEqual({ error: new RequiredFieldError('password').message })
   })
 })

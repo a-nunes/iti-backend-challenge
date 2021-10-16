@@ -8,7 +8,7 @@ export const adaptExpressRouter = (controller: Controller): RequestHandler => {
     if (statusCode === 200) {
       res.status(200).send(data)
     } else {
-      res.status(statusCode).send(data.message)
+      res.status(statusCode).json({ error: data.message })
     }
   }
 }

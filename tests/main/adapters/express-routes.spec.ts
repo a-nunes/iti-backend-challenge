@@ -50,7 +50,7 @@ describe('ExpressRouterAdapter', () => {
 
     expect(res.status).toHaveBeenCalledWith(400)
     expect(res.status).toHaveBeenCalledTimes(1)
-    expect(res.send).toHaveBeenCalledWith('any_error')
-    expect(res.send).toHaveBeenCalledTimes(1)
+    expect(res.json).toHaveBeenCalledWith({ error: 'any_error' })
+    expect(res.json).toHaveBeenCalledTimes(1)
   })
 })
