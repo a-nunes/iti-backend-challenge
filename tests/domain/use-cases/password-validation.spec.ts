@@ -10,6 +10,7 @@ describe('PasswordValidation', () => {
 
   beforeAll(() => {
     passwordValidator = mock()
+    passwordValidator.isValid.mockImplementation(() => true)
     password = 'valid%pAsSworD'
   })
 
@@ -34,6 +35,12 @@ describe('PasswordValidation', () => {
     const output = sut({ password: 'less9' })
 
     expect(output).toBe(false)
+  })
+
+  it('should return true if length equals 9', () => {
+    const output = sut({ password: 'hasNineS9' })
+
+    expect(output).toBe(true)
   })
 
   it('should return false if is not unique', () => {
