@@ -1,7 +1,8 @@
+import { adaptExpressRouter as adapt } from '@/main/adapters'
+import { makeValidationController } from '@/main/factories/controllers'
+
 import { Router } from 'express'
 
-export default (router: Router) => {
-  router.get('/validation', (req, res) => {
-    res.send('hello world')
-  })
+export default (router: Router): void => {
+  router.post('/validation', adapt(makeValidationController()))
 }
